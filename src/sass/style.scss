@@ -1,0 +1,8 @@
+@use "base";
+@use "components";
+
+@mixin background() {
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: brightness(0.4);
+}
