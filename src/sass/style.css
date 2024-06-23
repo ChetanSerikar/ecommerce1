@@ -331,7 +331,7 @@ a {
   }
   .product_page .product_page_conatiner .left {
     height: auto;
-    padding: 30px 16px;
+    padding: 50px 16px;
   }
   .product_page .product_page_conatiner .left .left_container .quantity_container {
     flex-direction: column;
@@ -460,6 +460,7 @@ a {
 .product {
   outline: 2px solid rgba(0, 0, 0, 0.205);
   outline-offset: -2px;
+  transition: 0.5s;
 }
 .product__info {
   padding: 1rem;
@@ -471,6 +472,10 @@ a {
 .product__info__price {
   font-size: 1.375rem;
   font-weight: 600;
+}
+
+.product:hover {
+  outline-color: rgba(0, 0, 0, 0.795);
 }
 
 .caresoul {

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useState } from "react";
-import { items } from "../components/Alldata";
+import { items } from "./Alldata";
 import Product from "./Product";
 
 const Caresoul = ({ numberOfCards = 4 }) => {

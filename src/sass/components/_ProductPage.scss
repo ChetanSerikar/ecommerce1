@@ -169,7 +169,7 @@
       overflow: hidden;
       .left {
         height: auto;
-        padding: 30px 16px;
+        padding: 50px 16px;
         .left_container {
           .quantity_container {
             flex-direction: column;
@@ -179,7 +179,6 @@
             width: 100%;
             flex-direction: column;
             justify-content: space-between;
-
             gap: 10px;
 
             .add_to_cart,

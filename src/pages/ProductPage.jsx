@@ -4,6 +4,7 @@ import { items } from "../components/Alldata";
 import { News } from "../components/News";
 import { Footer } from "../components/Footer";
 import { useShoppingCart } from "../context/ShoppingCartContext";
+import Caresoul from "../components/Caresoul";
 
 export const ProductPage = () => {
   const { id } = useParams();
@@ -94,6 +95,7 @@ export const ProductPage = () => {
           <diV>{item.size} </diV>
         </div>
       </div>
+      <Caresoul />
       <News />
       <Footer />
     </>

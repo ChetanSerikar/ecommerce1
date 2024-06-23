@@ -6,6 +6,7 @@ import { items } from "../components/Alldata";
 import { News } from "../components/News";
 import { Footer } from "../components/Footer";
 import { Products } from "../components/Products";
+import { Link } from "react-router-dom";
 
 export const Categories = () => {
   const [currCat, setCurrCat] = useState("");
@@ -29,14 +30,17 @@ export const Categories = () => {
       <div className="container-1">
         <div className="category">
           <div className="category__head">
-            <button className="category__head__home">HOME</button>
+            <Link to="/" className="category__head__home">
+              HOME
+            </Link>
             <div className="category__head__title">
               {currCat !== "" ? currCat.toUpperCase() : "all".toUpperCase()}
             </div>
           </div>
           <div className="category__filters">
-            {categories.map((item) => (
+            {categories.map((item, i) => (
               <div
+                key={i}
                 className={`category__filters__option ${
                   currCat === item ? "active" : null
                 }`}

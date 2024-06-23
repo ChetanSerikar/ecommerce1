@@ -45,13 +45,10 @@ function Navbar() {
           <Link onClick={() => setMobileNav(!mobileNav)} to="/categories">
             categories
           </Link>
-          <Link onClick={() => setMobileNav(!mobileNav)} to="/categories/lamps">
+          <Link onClick={() => setMobileNav(!mobileNav)} to="/categories">
             lamps
           </Link>
-          <Link
-            onClick={() => setMobileNav(!mobileNav)}
-            to="/categories/product/19"
-          >
+          <Link onClick={() => setMobileNav(!mobileNav)} to="/productpage/1">
             product page
           </Link>
         </div>

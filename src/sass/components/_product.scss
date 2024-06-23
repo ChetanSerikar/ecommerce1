@@ -1,6 +1,7 @@
 .product {
   outline: 2px solid rgba(0, 0, 0, 0.205);
   outline-offset: -2px;
+  transition: 0.5s;
   &__info {
     padding: 1rem;
     &__name {
@@ -12,4 +13,7 @@
       font-weight: 600;
     }
   }
+}
+.product:hover {
+  outline-color: rgba(0, 0, 0, 0.795);
 }
