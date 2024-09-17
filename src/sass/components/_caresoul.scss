@@ -1,13 +1,13 @@
 .caresoul {
   position: relative;
-
   margin: 0 auto;
   margin-bottom: 100px;
+
   &__grid_wrapper {
     overflow-inline: scroll;
     display: grid;
     grid-auto-flow: column;
-    // grid-auto-columns: calc((100% / 3) - 16px);
+    grid-auto-columns: calc((100% / 4) - 16px) !important;
     margin-bottom: var(--fs-40);
     scroll-behavior: smooth;
     scrollbar-width: 0;

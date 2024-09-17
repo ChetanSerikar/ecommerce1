@@ -7,6 +7,13 @@ import { items } from "./Alldata";
 
 function CartWithItems() {
   const { cartItems } = useShoppingCart();
+  const [total, setTotal] = useState(0)
+
+  useEffect(() => {
+    fetch('https://dummyjson.com/carts/user/1')
+      .then(res => res.json())
+      .then(console.log);
+  }, [])
 
   return (
     <>
@@ -14,7 +21,7 @@ function CartWithItems() {
         <div className="full-cart">
           {cartItems.map((item, id) =>
             cartItems.length !== 0 ? (
-              <CartItem key={id} item={item} />
+              <CartItem key={id} cartItem={item} setTotal={setTotal} total={total} />
             ) : (
               <EmptyCart key={id} />
             )
@@ -26,11 +33,8 @@ function CartWithItems() {
           <p>Subtotal</p>
           <p className="total-price">
             {" "}
-            {`Total: ` +
-              cartItems.reduce((total, CartItem) => {
-                const item = items.find((i) => i.id === CartItem.id);
-                return total + (item?.price || 0) * CartItem.quantity;
-              }, 0)}
+            {`Total: ` + total
+            }
           </p>
         </div>
         <div className="sub-left">

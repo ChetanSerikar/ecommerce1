@@ -17,3 +17,7 @@
 .product:hover {
   outline-color: rgba(0, 0, 0, 0.795);
 }
+
+.product-image.hidden {
+  display: none;
+}

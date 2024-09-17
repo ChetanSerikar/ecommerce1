@@ -5,13 +5,28 @@ import { News } from "../components/News";
 import { Footer } from "../components/Footer";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import Caresoul from "../components/Caresoul";
+import { useEffect } from "react";
+import LoadingImage from "../components/LoadingImage";
 
 export const ProductPage = () => {
+  const [item, setItem] = useState({})
   const { id } = useParams();
-  const item = items.find((item) => item.id === parseInt(id));
+  // const item = items.find((item) => item.id === parseInt(id));
 
-  const [image, setImage] = useState(item.img);
+  const [image, setImage] = useState("");
   const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    fetch(`https://dummyjson.com/products/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        setItem(data)
+        setImage(data?.thumbnail)
+        setQuantity(1);
+        console.log(data, "id")
+      });
+  }, [id])
+
 
   const { increaseProductQuantity } = useShoppingCart();
 
@@ -32,30 +47,27 @@ export const ProductPage = () => {
   return (
     <>
       <div className="product_page container-1">
-        <div>
+
           <div className="product_page_conatiner">
             <div className="right">
               <div className="main_image">
-                <img src={image} />
+              <LoadingImage src={image} />
               </div>
               <div className="images">
-                <img onMouseOver={changeImage} src={item.img} alt="product" />
-                <img
-                  onMouseOver={changeImage}
-                  src={item.otherImgs[0]}
-                  alt="product"
-                />
-                <img
-                  onMouseOver={changeImage}
-                  src={item.otherImgs[1]}
-                  alt="product"
-                />
+              {
+                item.images?.map((img, i) => (
+                  <div className="secondry_image" key={i}>
+                    <LoadingImage src={img} onMouseOver={changeImage} alt="" />
+                  </div>
+                ))
+              }
+
               </div>
             </div>
             <div className="left">
               <div className="left_container">
-                <div className="product_title"> {item.description} </div>
-                <div className="product_discription"> {item.specs} </div>
+              <div className="product_title"> {item.title} </div>
+              <div className="product_discription"> {item.description} </div>
                 <div className="quantity_container">
                   <div className="quantity">Quantity</div>
                   <div className="add_sub">
@@ -79,20 +91,20 @@ export const ProductPage = () => {
               </div>
             </div>
           </div>
-        </div>
+
       </div>
       <div className="details">
         <div className="detail">
-          <div className="heading"> Texture </div>
-          <diV>{item.texture} </diV>
+          <div className="heading"> Depth </div>
+          <diV>{item.dimensions?.depth} </diV>
         </div>
         <div className="detail">
-          <div className="heading"> Weight </div>
-          <diV>{item.weight} </diV>
+          <div className="heading"> Width </div>
+          <diV>{item.dimensions?.width} </diV>
         </div>
         <div className="detail">
-          <div className="heading"> Size </div>
-          <diV>{item.size} </diV>
+          <div className="heading"> Height </div>
+          <diV>{item.dimensions?.height} </diV>
         </div>
       </div>
       <Caresoul />

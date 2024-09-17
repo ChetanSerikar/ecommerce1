@@ -2,10 +2,32 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import { items } from "./Alldata";
 import Product from "./Product";
+import { useEffect } from "react";
 
 const Caresoul = ({ numberOfCards = 4 }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const ref = useRef();
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null);
+  async function fetchProducts() {
+    setLoading(true);
+    try {
+
+      const res = await fetch("https://dummyjson.com/products?limit=8");
+      const json = await res.json();
+      console.log(json)
+      setProducts(json.products);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message)
+      setLoading(false)
+    }
+  }
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
 
   const containerSize = 1200;
   const perSlide = numberOfCards;
@@ -22,13 +44,16 @@ const Caresoul = ({ numberOfCards = 4 }) => {
     ref.current.scrollLeft = ref.current.scrollLeft - slideWidth;
   };
   const handleRight = () => {
-    if (currentCard >= items.length - numberOfCards) {
+    if (currentCard >= products.length - numberOfCards) {
       return;
     }
     setCurrentCard((prev) => prev + 1);
     ref.current.scrollLeft = ref.current.scrollLeft + slideWidth;
   };
-  const con = true;
+
+  if (loading) {
+    return <>Loading..</>
+  }
   return (
     <div className="caresoul container-1">
       <div className="caresoul__header">
@@ -52,12 +77,23 @@ const Caresoul = ({ numberOfCards = 4 }) => {
         className="caresoul__grid_wrapper"
         style={{
           columnGap: `${gapSize}px`,
-          gridAutoColumns: `calc((100% / ${numberOfCards}) - 16px)`,
+          // gridAutoColumns: `calc((100% / ${numberOfCards}) - 16px)`,
         }}
         ref={ref}
       >
-        {items.map((item, i) => (
-          <Product product={item} />
+        {products.map((item, i) => (
+          <Product
+            key={i}
+            product={item}
+            id={item.id}
+            image={<Product.Image />}
+            info={
+              <Product.Info>
+                <Product.Title />
+                <Product.Price />
+              </Product.Info>
+            }
+          />
         ))}
       </div>
     </div>

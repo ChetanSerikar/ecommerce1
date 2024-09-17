@@ -1,6 +1,6 @@
 import "./sass/style.css";
 import { Categories } from "./pages/Categories";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { ProductPage } from "./pages/ProductPage";
 
@@ -15,7 +15,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="categories" element={<Categories />} />
-
           <Route path="productpage" element={<ProductPage />}>
             <Route path=":id" element={<ProductPage />} />
           </Route>
