@@ -523,6 +523,10 @@ a {
   outline-color: rgba(0, 0, 0, 0.795);
 }
 
+.product-image {
+  width: 100%;
+}
+
 .product-image.hidden {
   display: none;
 }

@@ -8,6 +8,7 @@ import LoadingImage from "./LoadingImage";
 function CartItem({ cartItem, setTotal, total }) {
   const [quantity, setQuantity] = useState(1);
   const [item, setItem] = useState({})
+  const [prevQuantity, setPrevQuantity] = useState()
 
 
 
@@ -26,12 +27,29 @@ function CartItem({ cartItem, setTotal, total }) {
       .then(res => res.json())
       .then(data => {
         setItem(data)
-      });
-  }, [cartItem?.id])
+        // setTotal(prev => prev + (cartItem.quantity * data?.price))
 
+      });
+  }, [cartItem?.id, cartItem.quantity])
+
+  // useEffect(() => {
+  //   setTotal(prev => prev + cartItem.quantity * item?.price)
+  // }, [cartItem.quantity])
   useEffect(() => {
-    setTotal(prev => prev + cartItem.quantity * item?.price)
-  }, [cartItem.quantity, item.price])
+    if (item.price !== undefined) {
+      setTotal(prev => {
+        const oldContribution = prevQuantity * item.price;
+        const newContribution = cartItem.quantity * item.price;
+        return prev - oldContribution + newContribution;
+      });
+      setPrevQuantity(cartItem.quantity);
+    }
+    return () => {
+      if (item.price !== undefined) {
+        setTotal(prev => prev - cartItem.quantity * item.price);
+      }
+    };
+  }, [cartItem.quantity, item.price, setTotal]);
 
   // const currenPro = items.find((i) => i.id === item.id);
 
