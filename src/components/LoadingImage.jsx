@@ -8,7 +8,7 @@ const LoadingImage = ({ src, ...props }) => {
     };
     return (
         <>
-            {isLoading && <div className="image-placeholder"><span>Loading...</span></div>}
+            {isLoading && <div style={{ width: "100%", minHeight: "200px", display: "flex", justifyContent: "center", alignItems: "center", maxHeight: "100%" }} className="image-placeholder"><span>Loading...</span></div>}
             <img src={src}
                 alt=""
                 className={`product-image ${isLoading ? "hidden" : ""}`} // Hide image until it's loaded
